@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Margin -->
+  <dimen name="dotSize">10dp</dimen>
+  <dimen name="progressHeight">10dp</dimen>
+  <dimen name="progressWidth">60dp</dimen>
+  <dimen name="progressMargin">2dp</dimen>
+</resources>

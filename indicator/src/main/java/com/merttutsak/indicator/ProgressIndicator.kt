@@ -42,12 +42,13 @@ class ProgressIndicator @JvmOverloads constructor(
         }
 
         if (attrs != null) {
-            val a = context.obtainStyledAttributes(attrs, R.styleable.Indicator)
-            progressColor = a.getColor(R.styleable.Indicator_progressColor, DEFAULT_PROGRESS_COLOR)
-            dotSpacing = a.getDimension(R.styleable.Indicator_dotSpacing, DEFAULT_DOT_SPACING)
-            progressTime = a.getInt(R.styleable.Indicator_progressColor, DEFAULT_PROGRESS_TIME)
-            isInfinite = a.getBoolean(R.styleable.Indicator_isInfinite, DEFAULT_IS_INFINITE)
-            a.recycle()
+            context.obtainStyledAttributes(attrs, R.styleable.Indicator).let {
+                progressColor = it.getColor(R.styleable.Indicator_progressColor, DEFAULT_PROGRESS_COLOR)
+                dotSpacing = it.getDimension(R.styleable.Indicator_dotSpacing, DEFAULT_DOT_SPACING)
+                progressTime = it.getInt(R.styleable.Indicator_progressColor, DEFAULT_PROGRESS_TIME)
+                isInfinite = it.getBoolean(R.styleable.Indicator_isInfinite, DEFAULT_IS_INFINITE)
+                it.recycle()
+            }
         }
     }
 

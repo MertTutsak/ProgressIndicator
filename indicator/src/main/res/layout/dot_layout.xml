@@ -2,22 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlDot"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical">
+    android:layout_height="@dimen/dotSize"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/dot_background"
+    android:minWidth="@dimen/dotSize">
 
-    <ImageView
-        android:id="@+id/dot"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/dot_background" />
-
-    <ImageView
-        android:visibility="gone"
+    <com.merttutsak.indicator.countdownprogress.CountdownProgress
         android:id="@+id/progress"
-        android:layout_width="60dp"
-        android:layout_height="8dp"
+        android:layout_width="@dimen/progressWidth"
+        android:layout_height="@dimen/progressHeight"
         android:layout_centerInParent="true"
-        android:background="@drawable/progress_background" />
+        android:layout_marginHorizontal="@dimen/progressMargin"
+        android:visibility="gone" />
 
 </RelativeLayout>

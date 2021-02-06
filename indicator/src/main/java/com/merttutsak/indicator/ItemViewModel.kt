@@ -1,11 +1,11 @@
 package com.merttutsak.indicator
 
+import android.icu.util.TimeUnit
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import com.merttutsak.indicator.utils.extension.delay
+import com.merttutsak.indicator.countdownprogress.CountdownProgress
 import io.reactivex.rxjava3.disposables.Disposable
 
 data class ItemViewModel(
@@ -15,14 +15,21 @@ data class ItemViewModel(
     val onEndProgress: () -> Unit
 ) {
 
-    var timer: Disposable? = null
-    private val dot: ImageView = layout.findViewById(R.id.dot)
-    private val progress: ImageView = layout.findViewById(R.id.progress)
+    private val progress: CountdownProgress = layout.findViewById(R.id.progress)
 
     init {
         val params = layout.layoutParams as FrameLayout.LayoutParams
         params.setMargins((margin).toInt(), 0, (margin).toInt(), 0)
         layout.layoutParams = params
+        layout.requestLayout()
+
+        progress.setDuration((time * 1000).toLong())
+        progress.onCompleteListener = {
+            if (isCurrent) {
+                onEndProgress()
+                progress.reset()
+            }
+        }
     }
 
     private var isCurrent: Boolean = false
@@ -46,30 +53,14 @@ data class ItemViewModel(
     }
 
     private fun startProgress() {
-        dot.isGone = true
+        progress.reset()
         progress.isVisible = true
-        startTimer()
+        progress.play()
     }
 
     private fun stopProgress() {
-        stopTimer()
-        //todo stop progress
         progress.isGone = true
-        dot.isVisible = true
+        progress.reset()
     }
 
-    private fun startTimer(){
-        stopTimer()
-        timer = delay(time.toLong()) {
-            if (isCurrent) {
-                stopTimer()
-                onEndProgress()
-            }
-        }
-    }
-
-    private fun stopTimer(){
-        timer?.dispose()
-        timer?.let { timer = null }
-    }
 }
