@@ -1,0 +1,14 @@
+<resources>
+    <attr name="progressColor" format="color" />
+    <attr name="progressTime" format="integer" />
+    <attr name="dotSpacing" format="dimension" />
+    <attr name="isInfinite" format="boolean" />
+
+    <declare-styleable name="Indicator">
+        <attr name="dotSpacing" />
+        <attr name="progressColor" />
+        <attr name="progressTime" />
+        <attr name="isInfinite"/>
+    </declare-styleable>
+
+</resources>
